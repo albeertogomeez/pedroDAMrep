@@ -82,6 +82,8 @@ public class Principal extends JFrame implements ActionListener {
 		panel.add(boton);
 		boton.addActionListener(this);
 		
+		
+		
 	}
 	
 	public void comprobador() {
