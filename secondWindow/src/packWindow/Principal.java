@@ -4,13 +4,16 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Principal extends JFrame implements ActionListener {
+public class Principal extends JFrame implements ActionListener, WindowListener {
 
 	private JFrame frame;
 	JLabel label = new JLabel();
@@ -54,6 +57,7 @@ public class Principal extends JFrame implements ActionListener {
 		
 		Font FLabel = new Font(label.getFont().getName(), Font.PLAIN, 20);
 		
+		// Ventana principal
 		label = new JLabel();
 		label.setText("Esta es la ventana principal");
 		label.setBounds(100, 0, 500, 100);
@@ -68,6 +72,7 @@ public class Principal extends JFrame implements ActionListener {
 		Ventana1.addActionListener(this);
 	}
 
+	// Método que implementa toda la segunda ventana directamente si pulsas el botón
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == Ventana1) {
@@ -88,23 +93,71 @@ public class Principal extends JFrame implements ActionListener {
 			label2.setFont(FLabel);
 			panel2.add(label2);
 			
-			
-			JButton Ventana2 = new JButton();
-			Ventana2.setText("Volver");
-			Ventana2.setBounds(125, 150, 200, 50);
-			Ventana2.addActionListener(new ActionListener() {
+			JButton volver = new JButton();
+			volver.setText("Volver");
+			volver.setBounds(125, 150, 200, 50);
+
+			// Método que hace que si le das click al botón "Volver", la segunda ventana
+			// se cierra y la primera ventana se vuelve operativa de nuevo
+			volver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if (e.getSource() == Ventana2) {
+					if (e.getSource() == volver) {
 						frame.setEnabled(true);
 						VentanaSec.dispose();
 					}
 				}
 			});
-			panel2.add(Ventana2);
+			panel2.add(volver);
+			
+			// Vuelve la primera ventana completamente inoperativa mientras la segunda ventana esté abierta
 			frame.setEnabled(false);
+			
+			// Método que hace que si se cierra la ventana mediante la X, la primera ventana pueda estar operativa
+			VentanaSec.addWindowListener(new WindowAdapter() {
+				public void windowClosing(WindowEvent e) {
+					frame.setEnabled(true);
+				}
+			});
 			VentanaSec.setVisible(true);
 		}
 		
 	}
+
+	// Métodos hechos para que el WindowListener pueda funcionar
+	@Override
+	public void windowOpened(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		
+	}
+
 
 }

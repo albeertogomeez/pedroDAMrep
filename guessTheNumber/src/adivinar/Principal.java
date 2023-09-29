@@ -1,6 +1,7 @@
 package adivinar;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
@@ -14,15 +15,21 @@ import javax.swing.JTextField;
 public class Principal extends JFrame implements ActionListener {
 
 	private JFrame frame;
-	JButton boton = new JButton();
-	JButton enter = new JButton();
-	JTextField texto = new JTextField();
+	
+	// Pestaña previa al inicio del juego.
+	JLabel start = new JLabel();
+	JButton inicio = new JButton();
+	
+	// Pestaña del juego.
 	JLabel label = new JLabel();
-	private JLabel resultado;
-	private int intentosRestantes;
-	private int comprobarNum;
+	JTextField texto = new JTextField();
+	JButton enter = new JButton();
+	JButton salir = new JButton();
+	JButton reinicio = new JButton();
+
 	int intentos = 10;
 	
+	// Generador del número aleatorio
 	Random r = new Random();
 	int aiNumber = r.nextInt(100)+1;
 
@@ -53,7 +60,7 @@ public class Principal extends JFrame implements ActionListener {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("Adivina el número");
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -62,68 +69,127 @@ public class Principal extends JFrame implements ActionListener {
 		frame.add(panel);
 		panel.setLayout(null);
 		
+		// Fuente para ajustar el texto
+		Font font = new Font(start.getFont().getName(), Font.PLAIN, 20);
 		
+		// Pestaña previa al juego
+		start = new JLabel();
+		start.setBounds(90, 0, 300, 200);
+		start.setText("¿Quieres jugar a un juego?");
+		start.setFont(font);
+		panel.add(start);
+		
+		inicio = new JButton();
+		inicio.setBounds(150, 150, 120, 40);
+		inicio.setText("Iniciar juego");
+		panel.add(inicio);
+		inicio.addActionListener(this);
+		
+		// Juego
 		label = new JLabel();
-		label.setText("Adivina el numero: inserta un numero del 1 al 100.");
+		label.setText("Adivina el número: inserta un número del 1 al 100.");
 		label.setBounds(50, 0, 500, 100);
 		panel.add(label);
+		label.setVisible(false);
 		
 		texto = new JTextField();
 		texto.setBounds(50, 100, 200, 25);
 		panel.add(texto);
+		texto.setVisible(false);
 		
 		enter = new JButton("Enter");
 		enter.setBounds(50, 150, 100, 20);
 		panel.add(enter);
 		enter.addActionListener(this);
+		enter.setVisible(false);
 		
-		boton = new JButton("Salir");
-		boton.setBounds(150, 150, 100, 20);
-		panel.add(boton);
-		boton.addActionListener(this);
+		salir = new JButton("Salir");
+		salir.setBounds(150, 150, 100, 20);
+		panel.add(salir);
+		salir.addActionListener(this);
+		salir.setVisible(false);
 		
-		
-		
+		reinicio = new JButton("Reiniciar");
+		reinicio.setBounds(50, 150, 100, 20);
+		panel.add(reinicio);
+		reinicio.setVisible(false);
+		reinicio.addActionListener(this);
+		reinicio.setVisible(false);
 	}
 	
+	// Método para comprobar el número una vez introducido.
 	public void comprobador() {
-		System.out.println(aiNumber);
 		try {
-			int valor = Integer.parseInt(texto.getText());
+			int valor = Integer.parseInt(texto.getText()); // Convierte el texto a Int para poder ser comparado
 				if (valor == aiNumber) {
+					// Si el valor es igual que el número introducido, has ganado.
 					label.setText("¡Enhorabuena! Has acertado el numero");
-					enter.setText("Reiniciar");
-					intentos = 11;
-					aiNumber = r.nextInt(100)+1;
+				    enter.setVisible(false);
+				    reinicio.setVisible(true);
 				} else if (valor > aiNumber) {
+					// Si el valor es mayor que el número introducido, baja un intento y da una pista del número
 					intentos--;
-					label.setText("Has fallado, tu numero es mas alto. Quedan " + intentos + " intentos");
+					label.setText("Has fallado, el numero correcto es mas bajo. Quedan " + intentos + " intentos");
 					texto.setText("");
 				} else if (valor < aiNumber) {
+					// Si el valor es menor que el número introducido, baja un intento y da una pista del número
 					intentos--;
-					label.setText("Has fallado, tu numero es mas bajo. Quedan " + intentos + " intentos");
+					label.setText("Has fallado, el numero correcto es más alto. Quedan " + intentos + " intentos");
 					texto.setText("");
 				} 
+				
+				if (valor > 100 || valor < 1) {
+					// Si el valor introducido es menor que 1 o mayor que 100, error.
+					label.setText("El número debe estar entre 1 y 100.");
+					texto.setText("");
+				}
 			
 				if (intentos == 0) {
-					label.setText("Te has quedado sin intentos. El numero era " + aiNumber + ".");
-					enter.setText("Reiniciar");
-					intentos = 11;
-					aiNumber = r.nextInt(100)+1;
+					// Si te quedas sin intentos, has perdido.
+					label.setText("Te has quedado sin intentos. El número era " + aiNumber + ".");
+					enter.setVisible(false);
+					reinicio.setVisible(true);
 				}
 				
 		} catch (NumberFormatException e) {
-			label.setText("El numero ingresado no es un numero valido");
+			// Si el valor introducido NO es un número, lo indica.
+			label.setText("El número ingresado no es un número válido.");
+			texto.setText("");
 		}
 		
 	}
 	
+	// Aquí es donde se produce la acción que conlleva pulsar los botones
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == enter) {
-			comprobador();
-		} else if (e.getSource() == boton) {
-			System.exit(0);
+			comprobador(); // Una vez pulsado el botón enter, se comprueba el número
+		} else if (e.getSource() == salir) {
+			System.exit(0); // Una vez pulsado el botón salir, sale de la aplicación
+		} else if (e.getSource() == inicio || e.getSource() == reinicio) {
+			iniciar(); // Para iniciar (o reiniciar en caso de ganar / perder), se accede al mismo método
 		}
+	}
+	
+	// Método que inicia el juego
+	public void iniciar() {
+		
+		// Reinicia todos los valores
+		intentos = 10;
+		aiNumber = r.nextInt(100)+1;
+		label.setText("Adivina el número: inserta un número del 1 al 100.");
+		texto.setText("");
+		
+		// Hace desaparecer lo que hay previo al juego. No hace nada si lo reinicia.
+		start.setVisible(false);
+		inicio.setVisible(false);
+		
+		// Hace visible el juego. No hace nada si lo reinicia.
+		label.setVisible(true);
+		enter.setVisible(true);
+		texto.setVisible(true);
+		salir.setVisible(true);
+		reinicio.setVisible(true);
 	}
 
 }
+

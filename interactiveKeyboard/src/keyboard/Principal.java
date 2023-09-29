@@ -105,6 +105,7 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 		Clean.addActionListener(this); // Pone el texto vacío (limpia el display)
 	}
 
+	// Método que añade 1, 2 o 3 al display dependiendo del botón que pulses.
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == Clean) {
@@ -119,6 +120,7 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 		
 	}
 	
+	// Método que comprueba si la tecla presionada es 1, 2 o 3. Si no lo es, no introduce la tecla.
 	public void keyTyped(KeyEvent e) {
 		char c = e.getKeyChar();
 		if (c != '1' && c != '2' && c != '3') {
@@ -126,6 +128,7 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 		}
 	}
 	
+	// Métodos hechos para que el KeyListener pueda funcionar.
 	public void keyPressed(KeyEvent e) {
 		
 	}
