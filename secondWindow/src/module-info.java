@@ -4,6 +4,6 @@
 /**
  * 
  */
-module sws {
+module secondWindow {
 	requires java.desktop;
 }
