@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Principal extends JFrame implements ActionListener, KeyListener {
+public class PrincipalIK extends JFrame implements ActionListener, KeyListener {
 
 	private JFrame frame;
 	JTextField insert = new JTextField();
@@ -28,7 +28,7 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Principal window = new Principal();
+					PrincipalIK window = new PrincipalIK();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +40,7 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 	/**
 	 * Create the application.
 	 */
-	public Principal() {
+	public PrincipalIK() {
 		initialize();
 	}
 

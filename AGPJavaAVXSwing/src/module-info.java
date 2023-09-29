@@ -2,8 +2,9 @@
  * 
  */
 /**
- * 
+ * @author alber
+ *
  */
-module sws {
+module AGPJavaAVXSwing {
 	requires java.desktop;
 }

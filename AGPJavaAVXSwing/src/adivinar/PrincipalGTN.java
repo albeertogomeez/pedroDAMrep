@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Principal extends JFrame implements ActionListener {
+public class PrincipalGTN extends JFrame implements ActionListener {
 
 	private JFrame frame;
 	
@@ -40,7 +40,7 @@ public class Principal extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Principal window = new Principal();
+					PrincipalGTN window = new PrincipalGTN();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,7 +52,7 @@ public class Principal extends JFrame implements ActionListener {
 	/**
 	 * Create the application.
 	 */
-	public Principal() {
+	public PrincipalGTN() {
 		initialize();
 	}
 
@@ -192,5 +192,4 @@ public class Principal extends JFrame implements ActionListener {
 	}
 
 }
-
 

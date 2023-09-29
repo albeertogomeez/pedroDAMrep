@@ -4,6 +4,6 @@
 /**
  * 
  */
-module interactiveKeyboard {
+module ika {
 	requires java.desktop;
 }

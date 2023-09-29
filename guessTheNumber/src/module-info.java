@@ -4,6 +4,6 @@
 /**
  * 
  */
-module GuessTheNumber {
+module asdasd {
 	requires java.desktop;
 }

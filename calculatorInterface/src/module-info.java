@@ -4,6 +4,6 @@
 /**
  * 
  */
-module calculatorInterface {
+module aru {
 	requires java.desktop;
 }

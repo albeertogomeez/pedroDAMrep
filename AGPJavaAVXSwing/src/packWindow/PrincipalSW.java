@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Principal extends JFrame implements ActionListener, WindowListener {
+public class PrincipalSW extends JFrame implements ActionListener, WindowListener {
 
 	private JFrame frame;
 	JLabel label = new JLabel();
@@ -26,7 +26,7 @@ public class Principal extends JFrame implements ActionListener, WindowListener 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Principal window = new Principal();
+					PrincipalSW window = new PrincipalSW();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +38,7 @@ public class Principal extends JFrame implements ActionListener, WindowListener 
 	/**
 	 * Create the application.
 	 */
-	public Principal() {
+	public PrincipalSW() {
 		initialize();
 	}
 
