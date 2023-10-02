@@ -217,7 +217,17 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == uno) {
+	    if (e.getSource() == enterRes) {
+	        String expresion = display.getText();
+	        try {
+	            double resultado = Calculator.evaluateExpression(expresion);
+	            display.setText(Double.toString(resultado));
+	        } catch (Exception ex) {
+	            display.setText("Error");
+	        }
+	    } else if (e.getSource() == clean) {
+	        display.setText("");
+	    } else if (e.getSource() == uno) {
 			display.setText(display.getText() + "1");
 		} else if (e.getSource() == dos) {
 			display.setText(display.getText() + "2");
@@ -247,8 +257,6 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 			display.setText(display.getText() + "/");
 		} else if (e.getSource() == mod) {
 			display.setText(display.getText() + "%");
-		} else if (e.getSource() == clean) {
-			display.setText("");
 		}
 	}
 	
@@ -269,6 +277,5 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 	public void keyReleased(KeyEvent e) {
 		
 	}
-
 
 }
