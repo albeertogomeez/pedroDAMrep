@@ -83,6 +83,7 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 		display.setForeground(Color.WHITE);
 		display.addKeyListener(this); // Comprueba si la tecla pulsada es 1, 2 o 3. Si no lo es, no escribe.
 		
+		// Botones para la calculadora
 		cero = new JButton("0");
 		cero.setBounds(5, 485, 205, 100);
 		cero.setBackground(Color.GRAY);
@@ -103,15 +104,6 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 		enterRes.setBackground(Color.GRAY);
 		enterRes.setForeground(Color.WHITE);
 		enterRes.addActionListener(this);
-//				new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				try {
-//					int valor = Integer.parseInt(display.getText());
-//				} catch (NumberFormatException ex) {
-//					display.setText("Syntax error");
-//				}
-//			}
-//		});
 		panel.add(enterRes);
 		
 		uno = new JButton("1");
@@ -214,7 +206,9 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 	
 		
 	}
-
+	
+	
+	// Método que hace una u otra cosa dependiendo de la tecla
 	@Override
 	public void actionPerformed(ActionEvent e) {
 	    if (e.getSource() == enterRes) {
@@ -260,6 +254,7 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 		}
 	}
 	
+	// Comprobador de la tecla pulsada
 	@Override
 	public void keyTyped(KeyEvent e) {
 		char c = e.getKeyChar();
